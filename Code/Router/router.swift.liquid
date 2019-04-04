@@ -1,0 +1,22 @@
+//
+//  {{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import RxSwift
+
+protocol {{ module_info.name }}RouterType: RouterType {}
+
+class {{ module_info.name }}Router: {{ module_info.name }}RouterType {
+
+    let transitionHandler: TransitionHandler
+    let fabric: ModuleFabricType
+
+    init(transitionHandler: TransitionHandler, fabric: ModuleFabricType) {
+        self.transitionHandler = transitionHandler
+        self.fabric = fabric
+    }
+}

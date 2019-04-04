@@ -1,0 +1,49 @@
+//
+//  {{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import Foundation
+import Swinject
+
+class {{ module_info.name }}Assembly: Assembly {
+
+    func assemble(container: Container) {
+        register{{ module_info.name }}ViewController(container: container)
+        register{{ module_info.name }}ViewModel(container: container)
+        register{{ module_info.name }}Router(container: container)
+        register{{ module_info.name }}Interactor(container: container)
+    }
+
+    private func register{{ module_info.name }}ViewController(container: Container) {
+        container.register({{ module_info.name }}ViewController.self) { res in
+            let viewController = {{ module_info.name }}ViewController()
+            viewController.viewModel = res.resolve({{ module_info.name }}ViewModel.self, argument: viewController)!
+            return viewController
+        }
+    }
+
+    private func register{{ module_info.name }}ViewModel(container: Container) {
+        container.register({{ module_info.name }}ViewModel.self) { (res, viewController: {{ module_info.name }}ViewController) in
+            let dependency = {{ module_info.name }}ViewModel
+                .Dependency(router: res.resolve({{ module_info.name }}RouterType.self, argument: viewController)!,
+                            interactor: res.resolve({{ module_info.name }}InteractorType.self)!)
+            return {{ module_info.name }}ViewModel(dependency: dependency)
+        }
+    }
+
+    private func register{{ module_info.name }}Router(container: Container) {
+        container.register({{ module_info.name }}RouterType.self) { (res, viewController: {{ module_info.name }}ViewController) in
+            {{ module_info.name }}Router(transitionHandler: viewController, fabric: res.resolve(ModuleFabricType.self)!)
+        }
+    }
+
+    private func register{{ module_info.name }}Interactor(container: Container) {
+        container.register({{ module_info.name }}InteractorType.self) { _ in
+            {{ module_info.name }}Interactor()
+        }
+    }
+}

@@ -1,0 +1,23 @@
+# Template information section
+name: rx_mvvm
+summary: Template for Rx MVVM module
+author: Anton Goncharov
+version: 1.0.0
+license: MIT
+
+# The declarations for code files
+code_files:
+# Assembly layer
+- {name: Assembly/Assembly.swift, path: Code/Assembly/assembly.swift.liquid}
+# Interactor layer
+- {name: Interactor/Interactor.swift, path: Code/Interactor/interactor.swift.liquid}
+# Router layer
+- {name: Router/Router.swift, path: Code/Router/router.swift.liquid}
+# ViewModel layer
+- {name: ViewModel/ViewModel.swift, path: Code/ViewModel/viewmodel.swift.liquid}
+# View layer
+- {name: View/ViewController.swift, path: Code/View/viewcontroller.swift.liquid}
+- {name: View/View.swift, path: Code/View/view.swift.liquid}
+
+# Template dependencies
+dependencies:

@@ -1,0 +1,34 @@
+//
+//  {{ module_info.file_name }}
+//  {{ module_info.project_name }}
+//
+//  Created by {{ developer.name }} on {{ date }}.
+//  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
+//
+
+import Foundation
+import RxSwift
+import RxCocoa
+
+class {{ module_info.name }}ViewModel: ViewModelType {
+
+    let input = Input()
+    let output: Output
+
+    required init(dependency: Dependency) {
+        //ViewModel logic is here
+        output = Output()
+    }
+}
+
+extension {{ module_info.name }}ViewModel {
+
+    struct Input {}
+
+    struct Output {}
+
+    struct Dependency {
+        let router: {{ module_info.name }}RouterType
+        let interactor: {{ module_info.name }}InteractorType
+    }
+}
