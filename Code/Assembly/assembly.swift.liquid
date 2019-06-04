@@ -23,7 +23,7 @@ class {{ module_info.name }}Assembly: Assembly {
             let viewController = {{ module_info.name }}ViewController()
             viewController.viewModel = res.resolve({{ module_info.name }}ViewModel.self, argument: viewController)!
             return viewController
-        }
+        }.inObjectScope(.transient)
     }
 
     private func registerViewModel(container: Container) {
@@ -32,18 +32,18 @@ class {{ module_info.name }}Assembly: Assembly {
                 .Dependency(router: res.resolve({{ module_info.name }}RouterType.self, argument: viewController)!,
                             interactor: res.resolve({{ module_info.name }}InteractorType.self)!)
             return {{ module_info.name }}ViewModel(dependency: dependency)
-        }
+        }.inObjectScope(.transient)
     }
 
     private func registerRouter(container: Container) {
         container.register({{ module_info.name }}RouterType.self) { (_, viewController: {{ module_info.name }}ViewController) in
             {{ module_info.name }}Router(transitionHandler: viewController)
-        }
+        }.inObjectScope(.transient)
     }
 
     private func registerInteractor(container: Container) {
         container.register({{ module_info.name }}InteractorType.self) { _ in
             {{ module_info.name }}Interactor()
-        }
+        }.inObjectScope(.transient)
     }
 }
