@@ -14,8 +14,10 @@ class {{ module_info.name }}ViewModel: ViewModelType {
 
     let input = Input()
     let output: Output
+    let dependency: Dependency
 
     required init(dependency: Dependency) {
+	self.dependency = dependency
         //ViewModel logic is here
         output = Output()
     }
