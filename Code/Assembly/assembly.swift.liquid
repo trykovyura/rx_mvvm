@@ -36,8 +36,8 @@ class {{ module_info.name }}Assembly: Assembly {
     }
 
     private func registerRouter(container: Container) {
-        container.register({{ module_info.name }}RouterType.self) { (res, viewController: {{ module_info.name }}ViewController) in
-            {{ module_info.name }}Router(transitionHandler: viewController, fabric: res.resolve(ModuleFabricType.self)!)
+        container.register({{ module_info.name }}RouterType.self) { (_, viewController: {{ module_info.name }}ViewController) in
+            {{ module_info.name }}Router(transitionHandler: viewController)
         }
     }
 

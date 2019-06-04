@@ -12,11 +12,13 @@ protocol {{ module_info.name }}RouterType: RouterType {}
 
 class {{ module_info.name }}Router: {{ module_info.name }}RouterType {
 
-    let transitionHandler: TransitionHandler
-    let fabric: ModuleFabricType
+    weak var transitionHandler: TransitionHandler?
 
-    init(transitionHandler: TransitionHandler, fabric: ModuleFabricType) {
+    init(transitionHandler: TransitionHandler) {
         self.transitionHandler = transitionHandler
-        self.fabric = fabric
+    }
+
+    func close() {
+        transitionHandler?.pop()
     }
 }
