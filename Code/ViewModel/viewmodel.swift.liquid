@@ -9,9 +9,11 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxFlow
 
-class {{ module_info.name }}ViewModel: ViewModelType {
+class {{ module_info.name }}ViewModel: ViewModelType, Stepper {
 
+    let steps = PublishRelay<Step>()
     let input = Input()
     let output: Output
     let dependency: Dependency
@@ -30,7 +32,6 @@ extension {{ module_info.name }}ViewModel {
     struct Output {}
 
     struct Dependency {
-        let router: {{ module_info.name }}RouterType
         let interactor: {{ module_info.name }}InteractorType
     }
 }

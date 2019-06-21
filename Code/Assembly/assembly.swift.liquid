@@ -14,30 +14,21 @@ class {{ module_info.name }}Assembly: Assembly {
     func assemble(container: Container) {
         registerViewController(container: container)
         registerViewModel(container: container)
-        registerRouter(container: container)
         registerInteractor(container: container)
     }
 
     private func registerViewController(container: Container) {
         container.register({{ module_info.name }}ViewController.self) { res in
-            let viewController = {{ module_info.name }}ViewController()
-            viewController.viewModel = res.resolve({{ module_info.name }}ViewModel.self, argument: viewController)!
-            return viewController
+            let viewModel = res.resolve({{ module_info.name }}ViewModel.self)!
+            return {{ module_info.name }}ViewController(viewModel: viewModel)
         }.inObjectScope(.transient)
     }
 
     private func registerViewModel(container: Container) {
-        container.register({{ module_info.name }}ViewModel.self) { (res, viewController: {{ module_info.name }}ViewController) in
+        container.register({{ module_info.name }}ViewModel.self) { res in
             let dependency = {{ module_info.name }}ViewModel
-                .Dependency(router: res.resolve({{ module_info.name }}RouterType.self, argument: viewController)!,
-                            interactor: res.resolve({{ module_info.name }}InteractorType.self)!)
+                .Dependency(interactor: res.resolve({{ module_info.name }}InteractorType.self)!)
             return {{ module_info.name }}ViewModel(dependency: dependency)
-        }.inObjectScope(.transient)
-    }
-
-    private func registerRouter(container: Container) {
-        container.register({{ module_info.name }}RouterType.self) { (_, viewController: {{ module_info.name }}ViewController) in
-            {{ module_info.name }}Router(transitionHandler: viewController)
         }.inObjectScope(.transient)
     }
 
