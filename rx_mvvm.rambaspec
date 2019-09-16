@@ -11,8 +11,6 @@ code_files:
 - {name: Assembly/Assembly.swift, path: Code/Assembly/assembly.swift.liquid}
 # Interactor layer
 - {name: Interactor/Interactor.swift, path: Code/Interactor/interactor.swift.liquid}
-# Router layer
-- {name: Router/Router.swift, path: Code/Router/router.swift.liquid}
 # ViewModel layer
 - {name: ViewModel/ViewModel.swift, path: Code/ViewModel/viewmodel.swift.liquid}
 # View layer
